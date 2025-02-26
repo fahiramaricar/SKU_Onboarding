@@ -44,8 +44,8 @@ def run():
     
     FIELD_PATTERNS = {
         "Batch Number": {
-            "pattern": r'^Batch \d{3}$',  
-            "example": "Batch 001"       # Example format for error messages
+            "pattern": r'^Batch \d{3}(?:-\d{2})?$',  
+            "example": "Batch 001 or Batch 001-01"      # Example format for error messages
         }
     }
 
@@ -147,8 +147,7 @@ def run():
                 
                 st.dataframe(empty_primary_child[["Material Bank SKU", "Primary Child"]])
                 
-            else:
-                st.info("✅ No action needed! Primary Child field is populated.")
+            
         
 
     def review_field_values(main_df, sku_df, match_field, necessary_fields):
@@ -320,5 +319,5 @@ def run():
                         st.dataframe(details["invalid"][["Manufacturer Sku EU", field]])
                         
             # 5. Check for empty 'Primary Child' values
-            st.write("### Primary Child Column Check")
+            # st.write("### Primary Child Column Check")
             check_primary_child_column(main_df)
